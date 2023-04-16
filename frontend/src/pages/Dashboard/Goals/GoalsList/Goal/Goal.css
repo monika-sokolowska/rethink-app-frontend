@@ -1,0 +1,16 @@
+.goal {
+  background: #16322d;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 90%;
+  height: 20%;
+  margin: 1rem;
+}
+
+.goal h3 {
+  color: white;
+  margin: 1rem;
+}

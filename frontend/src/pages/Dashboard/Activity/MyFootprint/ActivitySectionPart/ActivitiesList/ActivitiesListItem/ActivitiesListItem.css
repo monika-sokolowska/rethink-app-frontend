@@ -1,0 +1,29 @@
+.activities-list-item {
+  background: #16322d;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 90%;
+  height: 8vh;
+  margin: 1rem;
+}
+
+.activities-list-item h3 {
+  color: white;
+  margin: 1rem;
+}
+
+.activities-list-item h1 {
+  color: white;
+  margin: 1rem;
+}
+
+.activities-list-item-right-side {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 1rem;
+}

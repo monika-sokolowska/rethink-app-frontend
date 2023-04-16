@@ -1,0 +1,17 @@
+.news {
+  display: grid;
+  grid-template-columns: 30% 300px 300px 300px;
+  grid-template-rows: 400px 400px 400px 400px;
+  column-gap: 50px;
+  row-gap: 50px;
+  align-items: start;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 1.5rem;
+}
+
+.news-wrapper {
+  width: 300px;
+  height: 400px;
+}

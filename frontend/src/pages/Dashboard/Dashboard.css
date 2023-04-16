@@ -1,0 +1,75 @@
+main {
+  line-height: 1.75;
+  font-weight: 400;
+  height: 100%;
+}
+
+.logo {
+  width: auto;
+  height: 5vh;
+}
+
+.empty {
+  height: auto;
+  width: 50vh;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+.dashboard-page {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+.navbar {
+  background: #16322d;
+  box-shadow: 3px 10px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  height: 10%;
+}
+
+.links {
+  display: flex;
+  align-items: flex-start;
+  justify-content: right;
+  padding-right: 3rem;
+  width: 100%;
+}
+
+.log-out {
+  color: white;
+}
+
+.sidebar-container {
+  background: #46625a;
+  display: flex;
+  width: 40vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+}
+
+.sidebar .link {
+  padding: 1rem;
+  background: #57776e;
+  box-shadow: 3px 10px 25px rgba(0, 0, 0, 0.25);
+  height: auto;
+  color: rgb(255, 255, 255);
+}
+
+.sidebar .link:active {
+  padding: 1rem;
+  background: #5e8075;
+  box-shadow: 3px 10px 25px rgba(0, 0, 0, 0.25);
+  height: auto;
+  color: rgb(255, 255, 255);
+}

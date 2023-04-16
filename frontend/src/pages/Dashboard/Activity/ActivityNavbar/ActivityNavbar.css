@@ -1,0 +1,23 @@
+.activity-navbar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  text-align: center;
+}
+
+.activity-navbar .link {
+  width: 50%;
+  padding: 1rem;
+  background: #65897f;
+  box-shadow: 3px 10px 25px rgba(0, 0, 0, 0.25);
+  height: auto;
+  color: rgb(255, 255, 255);
+}
+
+.activity-navbar .link:active {
+  padding: 1rem;
+  background: #77968d;
+  box-shadow: 3px 10px 25px rgba(0, 0, 0, 0.25);
+  height: auto;
+  color: rgb(255, 255, 255);
+}
