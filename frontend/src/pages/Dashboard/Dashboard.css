@@ -21,7 +21,7 @@ main {
   height: 100%;
 }
 .dashboard-page {
-  width: 90vw;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -48,7 +48,7 @@ main {
 .sidebar-container {
   background: #46625a;
   display: flex;
-  width: 40vh;
+  width: 20%;
 }
 
 .sidebar {

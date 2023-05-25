@@ -1,6 +1,7 @@
 import firstPage from "../../assets/images/firstPage.svg";
 import Header from "../Header/Header";
 import "./FirstPage.css";
+import { Link } from "react-router-dom";
 
 const FirstPage = () => {
   return (
@@ -17,8 +18,12 @@ const FirstPage = () => {
             contribution to a greener environment.
           </h4>
           <div className="buttons">
-            <button className="log-in">Log in</button>
-            <button className="sign-up">Sign up</button>
+            <Link to="/login" className="log-in">
+              Log in
+            </Link>
+            <Link to="/register" className="sign-up">
+              Sign up
+            </Link>
           </div>
         </div>
         <div className="empty">

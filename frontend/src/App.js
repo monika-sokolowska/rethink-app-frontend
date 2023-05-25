@@ -9,28 +9,41 @@ import MyFootprint from "./pages/Dashboard/Activity/MyFootprint/MyFootprint";
 import HouseholdFootprint from "./pages/Dashboard/Activity/HouseholdFootprint/HouseholdFootprint";
 import News from "./pages/Dashboard/News/News";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "./store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<FirstPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/home" element={<SharedLayout />}>
-          <Route index element={<Stats />} />
-          <Route path="/home/goals" element={<Goals />} />
-          <Route path="/home/activity" element={<Activity />}>
-            <Route index element={<MyFootprint />} />
-            <Route
-              path="/home/activity/household"
-              element={<HouseholdFootprint />}
-            />
+    <Provider store={store}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<FirstPage />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/home" element={<SharedLayout />}>
+            <Route index element={<Stats />} />
+            <Route path="/home/goals" element={<Goals />} />
+            <Route path="/home/activity" element={<Activity />}>
+              <Route index element={<MyFootprint />} />
+              <Route
+                path="/home/activity/household"
+                element={<HouseholdFootprint />}
+              />
+            </Route>
+            <Route path="/home/news" element={<News />} />
           </Route>
-          <Route path="/home/news" element={<News />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+        <ToastContainer
+          position="top-center"
+          autoClose={1000}
+          pauseOnHover={false}
+          progress={undefined}
+          hideProgressBar
+        />
+      </BrowserRouter>
+    </Provider>
   );
 }
 

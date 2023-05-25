@@ -1,8 +1,8 @@
-import "./NewsBlock.css";
+import "./ArticleModal.css";
 
-const NewsBlock = ({ title, image, setModalOpen }) => {
+const ArticleModal = ({ title, image, text }) => {
   return (
-    <div className="news-block">
+    <div className="article-modal">
       <div className="image-container">
         <img src={image} />
       </div>
@@ -10,9 +10,9 @@ const NewsBlock = ({ title, image, setModalOpen }) => {
         <h1>{title}</h1>
       </div>
       <div className="text-container">
-        <h3 onClick={setModalOpen()}>Read more</h3>
+        <h1>{text}</h1>
       </div>
     </div>
   );
 };
-export default NewsBlock;
+export default ArticleModal;

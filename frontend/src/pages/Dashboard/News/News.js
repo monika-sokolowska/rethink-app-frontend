@@ -1,18 +1,26 @@
 import "./News.css";
 import React, { useState } from "react";
-import data from "./data";
+// import data from "./data";
 import NewsBlock from "./NewsBlock/NewsBlock";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getAllArticles } from "../../../reducers/allArticlesSlice";
 
 const News = () => {
-  const [news, setNews] = useState(data);
+  const { articles } = useSelector((store) => store.articles);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllArticles());
+  }, []);
 
   return (
     <section className="news">
-      {news.map((item) => {
-        const { id, title, image, text } = item;
+      {articles.map((item) => {
+        const { id, title, image } = item;
         return (
           <div key={id} className="news-wrapper">
-            <NewsBlock title={title} image={image} text={text} />;
+            <NewsBlock title={title} image={image} />;
           </div>
         );
       })}
