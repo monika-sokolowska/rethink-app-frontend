@@ -16,8 +16,12 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
   const [values, setValues] = useState(initialState);
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
-
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
+  const minFootprint = 0;
+  const maxFootprint = 5000;
+
+  const minKilometers = 0;
+  const maxKilometers = 10000;
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -58,6 +62,27 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
     setValues({ ...values, [name]: value });
   };
 
+  const handleNumberChange = (e) => {
+    e.stopPropagation();
+
+    const name = e.target.name;
+    let value = e.target.value;
+
+    if (name === "footprint") {
+      value = Math.max(
+        maxFootprint,
+        Math.min(minFootprint, Number(e.target.value))
+      );
+    } else if (name === "kilometers") {
+      value = Math.max(
+        minKilometers,
+        Math.min(maxKilometers, Number(e.target.value))
+      );
+    }
+
+    setValues({ ...values, [name]: value });
+  };
+
   return (
     <Modal
       className="modal"
@@ -90,7 +115,7 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
               <input
                 type="number"
                 id="kilometers"
-                onChange={handleChange}
+                onChange={handleNumberChange}
                 name="kilometers"
                 value={values.kilometers}
               />
@@ -100,7 +125,7 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
               <input
                 type="number"
                 id="footprint"
-                onChange={handleChange}
+                onChange={handleNumberChange}
                 name="footprint"
                 value={values.footprint}
               />

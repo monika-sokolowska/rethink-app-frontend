@@ -34,6 +34,10 @@ function App() {
             </Route>
             <Route path="/home/news" element={<News />} />
           </Route>
+          <Route path="/admin" element={<SharedAdminLayout />}>
+            <Route index element={<StatsAdmin />} />
+            <Route path="/admin/news" element={<NewsAdmin />} />
+          </Route>
         </Routes>
         <ToastContainer
           position="top-center"

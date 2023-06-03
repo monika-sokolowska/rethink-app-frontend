@@ -1,6 +1,6 @@
 import "./NewsBlock.css";
 
-const NewsBlock = ({ title, image, openModal }) => {
+const NewsBlockAdmin = ({ title, image, openModal }) => {
   return (
     <div className="news-block">
       <div className="image-container">
@@ -15,4 +15,4 @@ const NewsBlock = ({ title, image, openModal }) => {
     </div>
   );
 };
-export default NewsBlock;
+export default NewsBlockAdmin;

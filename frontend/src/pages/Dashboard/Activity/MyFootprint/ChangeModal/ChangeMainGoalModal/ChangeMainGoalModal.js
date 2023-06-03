@@ -16,6 +16,9 @@ const ChangeMainGoalModal = ({ isOpen, handleClose }) => {
   const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
+  const min = 0;
+  const max = 100;
+
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
 
   const onSubmit = (e) => {
@@ -45,11 +48,11 @@ const ChangeMainGoalModal = ({ isOpen, handleClose }) => {
     setValues(initialState);
   };
 
-  const handleChange = (e) => {
+  const handleNumberChange = (e) => {
     e.stopPropagation();
 
     const name = e.target.name;
-    const value = e.target.value;
+    const value = Math.max(min, Math.min(max, Number(e.target.value)));
 
     setValues({ ...values, [name]: value });
   };
@@ -76,7 +79,7 @@ const ChangeMainGoalModal = ({ isOpen, handleClose }) => {
               <input
                 type="number"
                 id="goal"
-                onChange={handleChange}
+                onChange={handleNumberChange}
                 name="goal"
                 value={values.goal}
               />
