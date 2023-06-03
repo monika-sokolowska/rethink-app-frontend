@@ -15,7 +15,7 @@ body {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   margin: 0;
-  background-color: #16322d;
+  background-color: rgb(17, 20, 48);
   height: 100vh;
 
   overflow: hidden;

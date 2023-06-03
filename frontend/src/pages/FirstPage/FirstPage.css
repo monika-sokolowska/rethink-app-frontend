@@ -44,8 +44,8 @@
 }
 
 .log-in {
-  background-color: #000000;
-  border: 1px solid #000000;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
   box-sizing: border-box;
@@ -53,7 +53,7 @@
   cursor: pointer;
   font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont,
     sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   padding: 15px 30px;
   text-align: center;
@@ -68,8 +68,8 @@
 }
 
 .sign-up {
-  background-color: #031f1a;
-  border: 1px solid #031f1a;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
   border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
   box-sizing: border-box;
@@ -77,7 +77,7 @@
   cursor: pointer;
   font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont,
     sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   padding: 15px 30px;
   text-align: center;

@@ -2,20 +2,23 @@ import React, { useState } from "react";
 import data from "./data";
 import "./GoalsList.css";
 import Goal from "./Goal/Goal";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const GoalsList = () => {
-  const [goals, setGoals] = useState(data);
+  const { goals } = useSelector((store) => store.goals);
 
   return (
     <div className="goals-list">
-      {goals.map((item) => {
-        const { id, name } = item;
-        return (
-          <article key={id} className="goals">
-            <Goal name={name} />;
-          </article>
-        );
-      })}
+      {goals &&
+        goals.map((item) => {
+          const { id, description } = item;
+          return (
+            <article key={id} className="goals-article">
+              <Goal name={description} />
+            </article>
+          );
+        })}
     </div>
   );
 };

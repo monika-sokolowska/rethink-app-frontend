@@ -1,6 +1,6 @@
 import "./NewsBlock.css";
 
-const NewsBlock = ({ title, image, setModalOpen }) => {
+const NewsBlock = ({ title, image }) => {
   return (
     <div className="news-block">
       <div className="image-container">
@@ -10,7 +10,7 @@ const NewsBlock = ({ title, image, setModalOpen }) => {
         <h1>{title}</h1>
       </div>
       <div className="text-container">
-        <h3 onClick={setModalOpen()}>Read more</h3>
+        <h3>Read more</h3>
       </div>
     </div>
   );

@@ -18,3 +18,17 @@ export const clearStoreThunk = async (message, thunkAPI) => {
     return Promise.reject();
   }
 };
+
+export const changeMainGoalThunk = async (url, goal) => {
+  try {
+    const resp = await customFetch.patch(url, goal);
+    return resp.data;
+  } catch (error) {}
+};
+
+export const getUserThunk = async (url) => {
+  try {
+    const resp = await customFetch.get(url);
+    return resp.data;
+  } catch (error) {}
+};

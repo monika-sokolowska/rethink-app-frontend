@@ -1,12 +1,12 @@
 import "./MainGoal.css";
 
-const MainGoal = () => {
+const MainGoal = ({ goal, handleClick }) => {
   return (
     <div className="main-goal">
       <h1>Carbon fotprint goal</h1>
       <div className="carbon-footprint-goal">
-        <h3>kg CO2</h3>
-        <button>Change</button>
+        <h3>{goal} kg CO2</h3>
+        <button onClick={handleClick}>Change</button>
       </div>
     </div>
   );

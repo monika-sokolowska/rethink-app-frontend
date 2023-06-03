@@ -1,5 +1,5 @@
 .news-block {
-  background: #5e8075;
+  background: #dae2e9;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -28,16 +28,16 @@
 
 .news-block h1 {
   width: 100%;
-  color: white;
+  color: rgb(17, 20, 48);
   font-size: 18px;
   margin-bottom: 0;
 }
 
 .news-block h3 {
-  color: white;
+  color: rgb(17, 20, 48);
   margin-left: 1rem;
   margin-right: 1rem;
-  font-size: 12px;
+  font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 0.5rem;

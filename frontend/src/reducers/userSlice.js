@@ -5,7 +5,12 @@ import {
   getUserFromLocalStorage,
   removeUserFromLocalStorage,
 } from "../utils/localStorage";
-import { loginUserThunk, clearStoreThunk } from "./userThunk";
+import {
+  loginUserThunk,
+  clearStoreThunk,
+  changeMainGoalThunk,
+  getUserThunk,
+} from "./userThunk";
 
 const initialState = {
   isLoading: false,
@@ -18,6 +23,18 @@ export const loginUser = createAsyncThunk(
     return loginUserThunk("/user/login", user, thunkAPI);
   }
 );
+
+export const changeMainGoal = createAsyncThunk(
+  "user/changeMainGoal",
+  async (data) => {
+    const { userId, goal } = data;
+    return changeMainGoalThunk(`/user/goal/change/${userId}`, goal);
+  }
+);
+
+export const getUser = createAsyncThunk("user/getUser", async (userId) => {
+  return getUserThunk(`/user/get/${userId}`);
+});
 
 export const clearStore = createAsyncThunk("user/clearStore", clearStoreThunk);
 const userSlice = createSlice({
@@ -51,6 +68,19 @@ const userSlice = createSlice({
       })
       .addCase(clearStore.rejected, () => {
         toast.error("There was an error..");
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUser.fulfilled, (state, { payload }) => {
+        const user = payload;
+        state.isLoading = false;
+        state.user = user;
+        addUserToLocalStorage(user);
+      })
+      .addCase(getUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        toast.error(payload);
       });
   },
 });

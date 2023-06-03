@@ -1,5 +1,5 @@
 import "./Goal.css";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiFillDelete, AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import Checkbox from "@mui/material/Checkbox";
 import CircleChecked from "@mui/icons-material/CheckCircleOutline";
 import CircleUnchecked from "@mui/icons-material/RadioButtonUnchecked";
@@ -10,21 +10,24 @@ const Goal = ({ name }) => {
       <Checkbox
         icon={
           <CircleUnchecked
-            style={{ color: "#fff", marginLeft: "1rem", height: "80%" }}
+            style={{ color: "#000", marginLeft: "1rem", height: "60%" }}
           />
         }
         checkedIcon={
           <CircleChecked
-            style={{ color: "#fff", marginLeft: "1rem", height: "80%" }}
+            style={{ color: "#000", marginLeft: "1rem", height: "60%" }}
           />
         }
         size={"small"}
       />
       <h3>{name}</h3>
-      <AiOutlineEdit
-        size={25}
-        style={{ color: "#fff", marginRight: "2rem", height: "80%" }}
-      />
+      <div className="edit-goal-buttons">
+        <AiOutlineEdit
+          size={20}
+          style={{ color: "#000", marginRight: "1rem", height: "60%" }}
+        />
+        <AiOutlineDelete size={20} style={{ color: "#000", height: "60%" }} />
+      </div>
     </div>
   );
 };
