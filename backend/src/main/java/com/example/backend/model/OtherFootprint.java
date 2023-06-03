@@ -53,4 +53,11 @@ public class OtherFootprint {
         this.footprint = footprint;
     }
 
+    public DailyFootprint getDailyFootprint() {
+        return dailyFootprint;
+    }
+
+    public void setDailyFootprint(DailyFootprint dailyFootprint) {
+        this.dailyFootprint = dailyFootprint;
+    }
 }

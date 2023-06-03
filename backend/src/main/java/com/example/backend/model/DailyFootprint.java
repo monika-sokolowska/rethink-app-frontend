@@ -24,6 +24,9 @@ public class DailyFootprint {
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private User user;
 
+    public DailyFootprint() {
+    }
+
     public Integer getId() {
         return id;
     }
@@ -39,5 +42,13 @@ public class DailyFootprint {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

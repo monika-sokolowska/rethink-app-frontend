@@ -1,8 +1,7 @@
 package com.example.backend.controller;
 
 
-import com.example.backend.DTO.LoginDTO;
-import com.example.backend.DTO.UserDTO;
+import com.example.backend.DTO.*;
 import com.example.backend.exceptions.UserNotFoundException;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
@@ -30,7 +29,7 @@ public class UserController {
         return userService.returnAllUsers();
     }
 
-    @PostMapping
+    @PostMapping(path="/login")
     public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginDTO) {
 
         try {
@@ -42,5 +41,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
+    }
+
+    @PatchMapping(path="/goal/change/{id}")
+    public ResponseEntity<UserDTO> changeMainGoal(@PathVariable Integer id, @RequestBody MainGoalDTO mainGoalDTO) {
+
+        return ResponseEntity.ok(userService.changeMainGoalById(id, mainGoalDTO));
+    }
+
+    @GetMapping(path="/get/{id}")
+    public ResponseEntity<UserDTO> getUser(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(userService.findUserById(id));
     }
 }

@@ -17,10 +17,10 @@ public class FoodFootprint {
     @Column(name = "name", columnDefinition = "VARCHAR(45)")
     private String name;
 
-    @Column(name = "meal", columnDefinition = "VARCHAR(45)")
+    @Enumerated(EnumType.STRING)
     private Meal meal;
 
-    @Column(name = "footprint", columnDefinition = "FLOAT(2,2)")
+    @Column(name = "footprint", columnDefinition = "FLOAT(4,2)")
     private Float footprint;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -62,4 +62,11 @@ public class FoodFootprint {
         this.footprint = footprint;
     }
 
+    public DailyFootprint getDailyFootprint() {
+        return dailyFootprint;
+    }
+
+    public void setDailyFootprint(DailyFootprint dailyFootprint) {
+        this.dailyFootprint = dailyFootprint;
+    }
 }

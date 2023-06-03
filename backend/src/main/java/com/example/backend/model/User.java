@@ -18,7 +18,7 @@ public class User {
     private String email;
     @Column(name = "password", columnDefinition = "VARCHAR(64)")
     private String password;
-    @Column(name = "main_goal", columnDefinition = "FLOAT(2,2)")
+    @Column(name = "main_goal", columnDefinition = "FLOAT(4,2)")
     private Float mainGoal;
     @Column(name = "is_admin", columnDefinition = "TINYINT(1)")
     private Boolean isAdmin;

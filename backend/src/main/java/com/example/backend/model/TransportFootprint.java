@@ -18,10 +18,10 @@ public class TransportFootprint {
     @Column(name = "name", columnDefinition = "VARCHAR(45)")
     private String name;
 
-    @Column(name = "kilometers", columnDefinition = "FLOAT(2,2)")
+    @Column(name = "kilometers", columnDefinition = "FLOAT(5,2)")
     private Float kilometers;
 
-    @Column(name = "footprint", columnDefinition = "FLOAT(2,2)")
+    @Column(name = "footprint", columnDefinition = "FLOAT(4,2)")
     private Float footprint;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -61,5 +61,13 @@ public class TransportFootprint {
 
     public void setFootprint(Float footprint) {
         this.footprint = footprint;
+    }
+
+    public DailyFootprint getDailyFootprint() {
+        return dailyFootprint;
+    }
+
+    public void setDailyFootprint(DailyFootprint dailyFootprint) {
+        this.dailyFootprint = dailyFootprint;
     }
 }
