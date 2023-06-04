@@ -22,7 +22,11 @@ const LoginPage = () => {
   const { user } = useSelector((store) => store.user);
 
   useEffect(() => {
-    if (user) {
+    if (user && user.isAdmin) {
+      setTimeout(() => {
+        navigate("/admin");
+      }, 2000);
+    } else if (user) {
       setTimeout(() => {
         navigate("/home");
       }, 2000);
