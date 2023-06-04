@@ -6,7 +6,7 @@ import {
 } from "./householdFootprintThunk";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   householdFootprint: [],
 };
 

@@ -1,38 +1,36 @@
 package com.example.backend.controller;
 
+import com.example.backend.DTO.AddArticleDTO;
+import com.example.backend.DTO.ArticleDTO;
 import com.example.backend.model.Article;
-import com.example.backend.model.User;
-import com.example.backend.repository.ArticleRepository;
-import com.example.backend.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.backend.service.ArticleService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @RestController
 @CrossOrigin
 @RequestMapping(value = "article")
 public class ArticleController {
 
-    @Autowired
-    private ArticleRepository articleRepository;
+    private ArticleService articleService;
 
-    @PreAuthorize("hasRole('USER')")
-    @PostMapping(path="/add") // Map ONLY POST Requests
-    public @ResponseBody String addNewArticle (@RequestParam String title
-            , @RequestParam String text) {
-
-        Article article = new Article();
-        article.setTitle(title);
-        article.setText(text);
-        articleRepository.save(article);
-        return "Saved";
+    public ArticleController(ArticleService articleService) {
+        this.articleService = articleService;
     }
 
     @PreAuthorize("hasRole('USER')")
     @GetMapping(path="/all")
     public @ResponseBody Iterable<Article> getAllArticles() {
-        return articleRepository.findAll();
+        return articleService.findAll();
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping(path="/add")
+    public ResponseEntity<ArticleDTO> addTransport(@RequestBody AddArticleDTO addArticleDTO) {
+
+
+        return ResponseEntity.ok(articleService.addArticle(addArticleDTO));
+    }
+
 }

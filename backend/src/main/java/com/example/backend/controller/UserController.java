@@ -56,7 +56,7 @@ public class UserController {
     }
 
 
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping(path="/all")
     public @ResponseBody Iterable<User> getAllUsers() {
         return userService.returnAllUsers();

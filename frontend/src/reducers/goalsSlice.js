@@ -17,8 +17,7 @@ export const getGoals = createAsyncThunk(
 
 export const addGoal = createAsyncThunk(
   "user/addGoal",
-  async (data, thunkAPI) => {
-    const { goal } = data;
+  async (goal, thunkAPI) => {
     const result = await addGoalThunk(`/goal/add`, goal);
     thunkAPI.dispatch(getGoals());
     return result;

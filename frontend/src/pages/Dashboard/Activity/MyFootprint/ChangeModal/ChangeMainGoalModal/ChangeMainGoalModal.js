@@ -86,7 +86,10 @@ const ChangeMainGoalModal = ({ isOpen, handleClose }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button className="secondary-button-change" onClick={onClose}>
+            <button
+              type="button"
+              className="secondary-button-change"
+              onClick={onClose}>
               Close
             </button>
             <input
