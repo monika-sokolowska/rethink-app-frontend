@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
+import Navbar from "./NavbarAdmin";
+import Sidebar from "./SidebarAdmin";
 import "../Dashboard.css";
 
-const SharedLayout = () => {
+const SharedAdminLayout = () => {
   return (
     <main>
       <Navbar />
@@ -16,4 +16,4 @@ const SharedLayout = () => {
     </main>
   );
 };
-export default SharedLayout;
+export default SharedAdminLayout;

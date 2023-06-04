@@ -14,6 +14,8 @@ const initialState = {
 const AddFoodModal = ({ isOpen, handleClose }) => {
   const [values, setValues] = useState(initialState);
   const dispatch = useDispatch();
+  const minFootprint = 0;
+  const maxFootprint = 5000;
 
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
 
@@ -52,6 +54,20 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
 
     const name = e.target.name;
     const value = e.target.value;
+
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleNumberChange = (e) => {
+    e.stopPropagation();
+
+    const name = e.target.name;
+    let value = e.target.value;
+
+    value = Math.max(
+      maxFootprint,
+      Math.min(minFootprint, Number(e.target.value))
+    );
 
     setValues({ ...values, [name]: value });
   };
@@ -99,7 +115,7 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
               <input
                 type="number"
                 id="footprint"
-                onChange={handleChange}
+                onChange={handleNumberChange}
                 name="footprint"
                 value={values.footprint}
               />

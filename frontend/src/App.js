@@ -8,6 +8,9 @@ import Activity from "./pages/Dashboard/Activity/Activity";
 import MyFootprint from "./pages/Dashboard/Activity/MyFootprint/MyFootprint";
 import HouseholdFootprint from "./pages/Dashboard/Activity/HouseholdFootprint/HouseholdFootprint";
 import News from "./pages/Dashboard/News/News";
+import SharedAdminLayout from "./pages/AdminDashboard/SharedAdminLayout";
+import StatsAdmin from "./pages/AdminDashboard/StatsAdmin/StatsAdmin";
+import NewsAdmin from "./pages/AdminDashboard/NewsAdmin/NewsAdmin";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -33,6 +36,10 @@ function App() {
               />
             </Route>
             <Route path="/home/news" element={<News />} />
+          </Route>
+          <Route path="/admin" element={<SharedAdminLayout />}>
+            <Route index element={<StatsAdmin />} />
+            <Route path="/admin/news" element={<NewsAdmin />} />
           </Route>
         </Routes>
         <ToastContainer

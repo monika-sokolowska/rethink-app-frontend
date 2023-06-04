@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import data from "./data";
 import "./GoalsList.css";
 import Goal from "./Goal/Goal";
 import { useEffect } from "react";

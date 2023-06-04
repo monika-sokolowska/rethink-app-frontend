@@ -23,7 +23,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/home");
+      navigate(user.isAdmin ? "/admin" : "/home");
     }
   }, [navigate, user]);
 

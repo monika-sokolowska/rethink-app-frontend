@@ -1,12 +1,12 @@
-import "./News.css";
+import "./NewsAdmin.css";
 import React, { useState } from "react";
-import NewsBlock from "./NewsBlock/NewsBlock";
+import NewsBlockAdmin from "./NewsBlockAdmin/NewsBlockAdmin";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllArticles } from "../../../reducers/allArticlesSlice";
-import ArticleModal from "./ArticleModal/ArticleModal";
+import ArticleModalAdmin from "./ArticleModalAdmin/ArticleModalAdmin";
 
-const News = () => {
+const NewsAdmin = () => {
   const { articles } = useSelector((store) => store.articles);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
@@ -32,7 +32,7 @@ const News = () => {
 
   return (
     <section className="news">
-      <ArticleModal
+      <ArticleModalAdmin
         isOpen={showModal}
         handleClose={handleModalClose}
         title={articleTitle}
@@ -43,7 +43,7 @@ const News = () => {
         console.log(item);
         return (
           <div key={id_article} className="news-wrapper">
-            <NewsBlock
+            <NewsBlockAdmin
               title={title}
               image={image}
               openModal={() => openModal(id_article)}
@@ -55,4 +55,4 @@ const News = () => {
     </section>
   );
 };
-export default News;
+export default NewsAdmin;

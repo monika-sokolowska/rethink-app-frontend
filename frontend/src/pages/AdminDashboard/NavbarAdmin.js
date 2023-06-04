@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-import "../Dashboard.css";
+import "../Dashbpard.css";
 import { clearStore } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
 
-const Navbar = () => {
+const NavbarAdmin = () => {
   const dispatch = useDispatch();
 
   return (
@@ -21,4 +21,4 @@ const Navbar = () => {
     </nav>
   );
 };
-export default Navbar;
+export default NavbarAdmin;

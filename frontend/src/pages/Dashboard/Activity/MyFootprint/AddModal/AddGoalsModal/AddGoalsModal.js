@@ -73,6 +73,7 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
             <div className="footprint-input-single">
               <label>Goal description</label>
               <input
+                maxLength={100}
                 type="text"
                 id="name"
                 onChange={handleChange}

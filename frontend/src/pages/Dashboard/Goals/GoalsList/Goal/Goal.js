@@ -20,7 +20,7 @@ const Goal = ({ name }) => {
         }
         size={"small"}
       />
-      <h3>{name}</h3>
+      <h3>{name.substring(0, 100)}</h3>
       <div className="edit-goal-buttons">
         <AiOutlineEdit
           size={20}

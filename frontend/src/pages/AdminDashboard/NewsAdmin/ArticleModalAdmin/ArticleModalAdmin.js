@@ -1,7 +1,7 @@
-import "./ArticleModal.css";
+import "./ArticleModalAdmin.css";
 import Modal from "react-overlays/Modal";
 
-const ArticleModal = ({ isOpen, handleClose, title, description }) => {
+const ArticleModalAdmin = ({ isOpen, handleClose, title, description }) => {
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
 
   return (
@@ -24,4 +24,4 @@ const ArticleModal = ({ isOpen, handleClose, title, description }) => {
     </Modal>
   );
 };
-export default ArticleModal;
+export default ArticleModalAdmin;
