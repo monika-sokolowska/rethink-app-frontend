@@ -3,6 +3,7 @@ package com.example.backend.service;
 import com.example.backend.DTO.*;
 import com.example.backend.model.Goal;
 import com.example.backend.model.OtherFootprint;
+import com.example.backend.model.Role;
 import com.example.backend.model.User;
 import com.example.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -52,7 +54,8 @@ public class UserService {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getMainGoal()
+                user.getMainGoal(),
+                user.getRoles().stream().map(Role::getName).collect(Collectors.toSet())
         );
     }
 

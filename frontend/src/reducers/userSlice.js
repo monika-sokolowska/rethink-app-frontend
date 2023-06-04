@@ -19,6 +19,7 @@ const initialState = {
   isLoading: false,
   token: getTokenFromLocalStorage(),
   user: getUserFromLocalStorage(),
+  registered: false,
 };
 
 export const loginUser = createAsyncThunk(
@@ -26,6 +27,14 @@ export const loginUser = createAsyncThunk(
   async (user, thunkAPI) => {
     const result = await loginUserThunk("/user/login", user, thunkAPI);
     thunkAPI.dispatch(getUserAfterLogin());
+    return result;
+  }
+);
+
+export const registerUser = createAsyncThunk(
+  "user/registerUser",
+  async (data, thunkAPI) => {
+    const result = await loginUserThunk("/user/register", data, thunkAPI);
     return result;
   }
 );
@@ -114,6 +123,11 @@ const userSlice = createSlice({
         state.user = user;
         addUserToLocalStorage(user);
         toast.success(`Welcome ${user.name}`);
+      })
+      .addCase(registerUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.registered = true;
+        toast.success(`You are registered! You can now log in.`);
       });
   },
 });

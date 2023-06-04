@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
-import "../Dashbpard.css";
+import "../Dashboard.css";
 import { clearStore } from "../../reducers/userSlice";
 import { useDispatch } from "react-redux";
 
@@ -14,7 +14,8 @@ const NavbarAdmin = () => {
         <Link
           to="/"
           className="log-out"
-          onClick={() => dispatch(clearStore("Logging out..."))}>
+          onClick={() => dispatch(clearStore("Logging out..."))}
+        >
           Log out
         </Link>
       </div>

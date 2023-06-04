@@ -1,6 +1,8 @@
 package com.example.backend.controller;
 import com.example.backend.DTO.*;
 import com.example.backend.exceptions.UserNotFoundException;
+import com.example.backend.model.ERole;
+import com.example.backend.model.Role;
 import com.example.backend.model.User;
 import com.example.backend.repository.RoleRepository;
 import com.example.backend.repository.UserRepository;
@@ -20,7 +22,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.example.backend.security.Utils.GetCurrentUser;
@@ -91,6 +95,33 @@ public class UserController {
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterDTO register) {
+
+        if (userRepository.existsByEmail(register.email())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
+        }
+
+        // Create new user's account
+        User user = new User(register.name(), register.lastName(), register.email(),
+                encoder.encode(register.password()));
+
+        Set<Role> roles = new HashSet<>();
+
+        Role userRole = roleRepository.findByName(ERole.ROLE_USER);
+        if(userRole == null ) {
+            throw new RuntimeException("Role not found");
+        }
+        roles.add(userRole);
+
+        user.setRoles(roles);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(1);
     }
 
     @PreAuthorize("hasRole('USER')")

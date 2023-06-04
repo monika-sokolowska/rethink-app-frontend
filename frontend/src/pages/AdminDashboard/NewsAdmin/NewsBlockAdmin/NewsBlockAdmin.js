@@ -1,4 +1,4 @@
-import "./NewsBlock.css";
+import "./NewsBlockAdmin.css";
 
 const NewsBlockAdmin = ({ title, image, openModal }) => {
   return (
