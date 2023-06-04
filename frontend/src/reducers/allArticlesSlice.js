@@ -1,31 +1,38 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getAllArticlesThunk } from "./allArticlesThunk";
+import { getAllArticlesThunk, addArticleThunk } from "./allArticlesThunk";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   articles: [],
 };
 
 export const getAllArticles = createAsyncThunk(
   "allArticles/getAllArticles",
-  getAllArticlesThunk
+  async (_, thunkAPI) => {
+    return getAllArticlesThunk(thunkAPI);
+  }
+);
+
+export const addArticle = createAsyncThunk(
+  "allArticles/addArticle",
+  async (article, thunkAPI) => {
+    console.log("addArticle", article);
+    const result = await addArticleThunk(`/article/add`, article);
+    console.log("result", result);
+
+    thunkAPI.dispatch(getAllArticles());
+    return result;
+  }
 );
 
 const allArticlesSlice = createSlice({
   name: "allArticles",
   initialState,
-  reducers: {
-    showLoading: (state) => {
-      state.isLoading = true;
-    },
-    hideLoading: (state) => {
-      state.isLoading = false;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getAllArticles.pending, (state) => {
+      .addCase(getAllArticles.pending, (state, { payload }) => {
         state.isLoading = true;
       })
       .addCase(getAllArticles.fulfilled, (state, { payload }) => {
@@ -38,7 +45,5 @@ const allArticlesSlice = createSlice({
       });
   },
 });
-
-export const { showLoading, hideLoading } = allArticlesSlice.actions;
 
 export default allArticlesSlice.reducer;

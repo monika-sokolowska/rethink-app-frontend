@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { getFootprintThunk, addFootprintThunk } from "./dailyFootprintThunk";
 
 const initialState = {
-  isLoading: true,
+  isLoading: false,
   transport: [],
   food: [],
   other: [],
@@ -32,11 +32,10 @@ export const getOtherFootprint = createAsyncThunk(
 
 export const addTransportFootprint = createAsyncThunk(
   "user/addTransportFootprint",
-  async (data, thunkAPI) => {
-    const { addedFootprint } = data;
+  async (footprint, thunkAPI) => {
     const result = await addFootprintThunk(
       `/footprint/add/transport`,
-      addedFootprint
+      footprint
     );
     thunkAPI.dispatch(getTransportFootprint());
     return result;
@@ -45,28 +44,18 @@ export const addTransportFootprint = createAsyncThunk(
 
 export const addFoodFootprint = createAsyncThunk(
   "user/addFoodFootprint",
-  async (data, thunkAPI) => {
-    const { addedFootprint } = data;
-    const result = await addFootprintThunk(
-      `/footprint/add/food`,
-      addedFootprint
-    );
+  async (footprint, thunkAPI) => {
+    const result = await addFootprintThunk(`/footprint/add/food`, footprint);
     thunkAPI.dispatch(getFoodFootprint());
     return result;
   }
 );
 
 export const addOtherFootprint = createAsyncThunk(
-  "user/addFoodFootprint",
-  async (data, thunkAPI) => {
-    const { addedFootprint } = data;
-    const result = await addFootprintThunk(
-      `/footprint/add/other`,
-      addedFootprint
-    );
-
+  "user/addOtherFootprint",
+  async (footprint, thunkAPI) => {
     thunkAPI.dispatch(getOtherFootprint());
-    return result;
+    return addFootprintThunk(`/footprint/add/other`, footprint);
   }
 );
 

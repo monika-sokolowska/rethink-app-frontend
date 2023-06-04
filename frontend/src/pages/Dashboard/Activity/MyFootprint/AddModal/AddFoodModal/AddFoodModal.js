@@ -33,12 +33,9 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
       return;
     }
 
-    const addedFootprint = {
-      name: name,
-      meal: meal,
-      footprint: footprint,
-    };
-    dispatch(addFoodFootprint({ addedFootprint: addedFootprint }));
+    dispatch(
+      addFoodFootprint({ name: name, meal: meal, footprint: footprint })
+    );
     handleClose();
     setValues(initialState);
   };
@@ -65,8 +62,8 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
     let value = e.target.value;
 
     value = Math.max(
-      maxFootprint,
-      Math.min(minFootprint, Number(e.target.value))
+      minFootprint,
+      Math.min(maxFootprint, Number(e.target.value))
     );
 
     setValues({ ...values, [name]: value });
@@ -77,8 +74,7 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
       className="modal"
       show={isOpen}
       onHide={handleClose}
-      renderBackdrop={renderBackdrop}
-    >
+      renderBackdrop={renderBackdrop}>
       <div className="modal">
         <div className="modal-header">
           <div className="modal-title">Add food footprint</div>
@@ -122,14 +118,16 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button className="secondary-button" onClick={onClose}>
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={onClose}>
               Close
             </button>
             <input
               type="submit"
               value="Save Changes"
-              className="primary-button"
-            ></input>
+              className="primary-button"></input>
           </div>
         </form>
       </div>

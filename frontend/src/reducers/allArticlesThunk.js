@@ -9,3 +9,11 @@ export const getAllArticlesThunk = async (_, thunkAPI) => {
     return thunkAPI.rejectWithValue(error.response.data.msg);
   }
 };
+
+export const addArticleThunk = async (url, article) => {
+  console.log(article);
+  try {
+    const resp = await customFetch.post(url, article);
+    return resp.data;
+  } catch (error) {}
+};

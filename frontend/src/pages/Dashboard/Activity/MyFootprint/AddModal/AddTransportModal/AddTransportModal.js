@@ -3,7 +3,6 @@ import "../AddModal.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import { addTransportFootprint } from "../../../../../../reducers/dailyFootprintSlice";
 
 const initialState = {
@@ -14,7 +13,6 @@ const initialState = {
 
 const AddTransportModal = ({ isOpen, handleClose }) => {
   const [values, setValues] = useState(initialState);
-  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
   const minFootprint = 0;
@@ -37,14 +35,12 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
       return;
     }
 
-    const userId = user.id;
-    const addedFootprint = {
-      name: name,
-      kilometers: kilometers,
-      footprint: footprint,
-    };
     dispatch(
-      addTransportFootprint({ userId: userId, addedFootprint: addedFootprint })
+      addTransportFootprint({
+        name: name,
+        kilometers: kilometers,
+        footprint: footprint,
+      })
     );
     handleClose();
     setValues(initialState);
@@ -70,13 +66,13 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
 
     if (name === "footprint") {
       value = Math.max(
-        maxFootprint,
-        Math.min(minFootprint, Number(e.target.value))
+        minFootprint,
+        Math.min(maxFootprint, Number(e.target.value))
       );
     } else if (name === "kilometers") {
       value = Math.max(
-        minKilometers,
-        Math.min(maxKilometers, Number(e.target.value))
+        minFootprint,
+        Math.min(maxFootprint, Number(e.target.value))
       );
     }
 
@@ -88,8 +84,7 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
       className="modal"
       show={isOpen}
       onHide={handleClose}
-      renderBackdrop={renderBackdrop}
-    >
+      renderBackdrop={renderBackdrop}>
       <div className="modal">
         <div className="modal-header">
           <div className="modal-title">Add transport footprint</div>
@@ -136,15 +131,13 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
             <button
               className="secondary-button"
               onClick={onClose}
-              type="button"
-            >
+              type="button">
               Close
             </button>
             <input
               type="submit"
               value="Save Changes"
-              className="primary-button"
-            ></input>
+              className="primary-button"></input>
           </div>
         </form>
       </div>

@@ -12,7 +12,6 @@ const initialState = {
 
 const AddOtherModal = ({ isOpen, handleClose }) => {
   const [values, setValues] = useState(initialState);
-  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
@@ -29,11 +28,7 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
       return;
     }
 
-    const userId = user.id;
-    const goal = {
-      name: name,
-    };
-    dispatch(addGoal({ userId: userId, goal: goal }));
+    dispatch(addGoal({ name: name }));
     handleClose();
     setValues(initialState);
   };
@@ -83,7 +78,10 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button className="secondary-button" onClick={onClose}>
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={onClose}>
               Close
             </button>
             <input
