@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../reducers/userSlice";
+import { loginUser, loginUserFlow } from "../../reducers/userSlice";
 import { useNavigate } from "react-router-dom";
 
 const initialState = {
@@ -23,11 +23,9 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      setTimeout(() => {
-        navigate("/home");
-      }, 2000);
+      navigate("/home");
     }
-  }, [user]);
+  }, [navigate, user]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +37,7 @@ const LoginPage = () => {
       return;
     }
     if (isMember) {
-      dispatch(loginUser({ email: email, password: password }));
+      dispatch(loginUserFlow({ email: email, password: password }));
       return;
     }
   };

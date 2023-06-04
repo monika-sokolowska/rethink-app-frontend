@@ -24,7 +24,7 @@ const Goals = () => {
   useEffect(() => {
     dispatch(getGoals(user.id));
     dispatch(getUser(user.id));
-  }, []);
+  }, [dispatch, user.id]);
 
   if (goals.isLoading) {
     return <div className="other">Loading...</div>;
@@ -36,7 +36,6 @@ const Goals = () => {
 
   const handleAddGoalsModalClose = () => {
     setShowAddGoalsModal(false);
-    reload();
   };
 
   const openMainGoalChangeModal = () => {
@@ -45,7 +44,6 @@ const Goals = () => {
 
   const handleMainGoalChangeModalClose = () => {
     setShowChangeMainGoalsModal(false);
-    reload();
   };
 
   return (

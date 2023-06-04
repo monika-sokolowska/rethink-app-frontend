@@ -1,11 +1,15 @@
 package com.example.backend.controller;
 
 import com.example.backend.DTO.*;
+import com.example.backend.security.services.UserDetailsImpl;
 import com.example.backend.service.*;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static com.example.backend.security.Utils.GetCurrentUser;
 
 @RestController
 @CrossOrigin
@@ -31,42 +35,54 @@ public class DailyFootprintController {
     }
 
 
-    @GetMapping(path="/transport/{id}")
-    public ResponseEntity<List<TransportFootprintDTO>> getTransport(@PathVariable Integer id) {
-        return ResponseEntity.ok(transportFootprintService.findTransportFootprintById(id));
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(path="/transport")
+    public ResponseEntity<List<TransportFootprintDTO>> getTransport() {
+        UserDetailsImpl user = GetCurrentUser();
+        return ResponseEntity.ok(transportFootprintService.findTransportFootprintById(user.getId()));
     }
 
-    @GetMapping(path="/food/{id}")
-    public ResponseEntity<List<FoodFootprintDTO>> getFood(@PathVariable Integer id) {
-        return ResponseEntity.ok(foodFootprintService.findFoodFootprintById(id));
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(path="/food")
+    public ResponseEntity<List<FoodFootprintDTO>> getFood() {
+        UserDetailsImpl user = GetCurrentUser();
+        return ResponseEntity.ok(foodFootprintService.findFoodFootprintById(user.getId()));
     }
 
-    @GetMapping(path="/other/{id}")
-    public ResponseEntity<List<OtherFootprintDTO>> getOther(@PathVariable Integer id) {
-        return ResponseEntity.ok(otherFootprintService.findOtherFootprintById(id));
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping(path="/other")
+    public ResponseEntity<List<OtherFootprintDTO>> getOther() {
+        UserDetailsImpl user = GetCurrentUser();
+        return ResponseEntity.ok(otherFootprintService.findOtherFootprintById(user.getId()));
     }
 
-    @PostMapping(path="/add/transport/{id}")
-    public ResponseEntity<TransportFootprintDTO> addTransport(@PathVariable Integer id, @RequestBody AddTransportDTO addTransportDTO) {
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path="/add/transport")
+    public ResponseEntity<TransportFootprintDTO> addTransport(@RequestBody AddTransportDTO addTransportDTO) {
 
-        dailyFootprintService.findOrCreateDailyFootprintById(id);
+        UserDetailsImpl user = GetCurrentUser();
+        dailyFootprintService.findOrCreateDailyFootprintById(user.getId());
 
-        return ResponseEntity.ok(transportFootprintService.addTransportFootprintById(id, addTransportDTO));
+        return ResponseEntity.ok(transportFootprintService.addTransportFootprintById(user.getId(), addTransportDTO));
     }
 
-    @PostMapping(path="/add/food/{id}")
-    public ResponseEntity<FoodFootprintDTO> addFood(@PathVariable Integer id, @RequestBody AddFoodDTO addFoodDTO) {
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path="/add/food")
+    public ResponseEntity<FoodFootprintDTO> addFood(@RequestBody AddFoodDTO addFoodDTO) {
 
-        dailyFootprintService.findOrCreateDailyFootprintById(id);
+        UserDetailsImpl user = GetCurrentUser();
+        dailyFootprintService.findOrCreateDailyFootprintById(user.getId());
 
-        return ResponseEntity.ok(foodFootprintService.addFoodFootprintById(id, addFoodDTO));
+        return ResponseEntity.ok(foodFootprintService.addFoodFootprintById(user.getId(), addFoodDTO));
     }
 
-    @PostMapping(path="/add/other/{id}")
-    public ResponseEntity<OtherFootprintDTO> addOther(@PathVariable Integer id, @RequestBody AddOtherDTO addOtherDTO) {
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping(path="/add/other")
+    public ResponseEntity<OtherFootprintDTO> addOther(@RequestBody AddOtherDTO addOtherDTO) {
 
-        dailyFootprintService.findOrCreateDailyFootprintById(id);
+        UserDetailsImpl user = GetCurrentUser();
+        dailyFootprintService.findOrCreateDailyFootprintById(user.getId());
 
-        return ResponseEntity.ok(otherFootprintService.addOtherFootprintById(id, addOtherDTO));
+        return ResponseEntity.ok(otherFootprintService.addOtherFootprintById(user.getId(), addOtherDTO));
     }
 }

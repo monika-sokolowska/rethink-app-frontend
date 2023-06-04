@@ -18,7 +18,7 @@ public class OtherFootprint {
     @Column(name = "name", columnDefinition = "VARCHAR(45)")
     private String name;
 
-    @Column(name = "footprint", columnDefinition = "FLOAT(2,2)")
+    @Column(name = "footprint", columnDefinition = "FLOAT(4,2)")
     private Float footprint;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

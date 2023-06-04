@@ -2,8 +2,13 @@ package com.example.backend.model;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -20,8 +25,12 @@ public class User {
     private String password;
     @Column(name = "main_goal", columnDefinition = "FLOAT(4,2)")
     private Float mainGoal;
-    @Column(name = "is_admin", columnDefinition = "TINYINT(1)")
-    private Boolean isAdmin;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_role"))
+    private Set<Role> roles = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -67,13 +76,11 @@ public class User {
         this.mainGoal = mainGoal;
     }
 
-    public Boolean getIsAdmin() {
-        return isAdmin;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setIs_admin(Boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
-
-
 }

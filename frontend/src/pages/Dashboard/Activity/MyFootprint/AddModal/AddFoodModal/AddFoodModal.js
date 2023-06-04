@@ -3,7 +3,6 @@ import "../AddModal.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import { addFoodFootprint } from "../../../../../../reducers/dailyFootprintSlice";
 
 const initialState = {
@@ -14,7 +13,6 @@ const initialState = {
 
 const AddFoodModal = ({ isOpen, handleClose }) => {
   const [values, setValues] = useState(initialState);
-  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
@@ -33,15 +31,12 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
       return;
     }
 
-    const userId = user.id;
     const addedFootprint = {
       name: name,
       meal: meal,
       footprint: footprint,
     };
-    dispatch(
-      addFoodFootprint({ userId: userId, addedFootprint: addedFootprint })
-    );
+    dispatch(addFoodFootprint({ addedFootprint: addedFootprint }));
     handleClose();
     setValues(initialState);
   };
@@ -66,7 +61,8 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
       className="modal"
       show={isOpen}
       onHide={handleClose}
-      renderBackdrop={renderBackdrop}>
+      renderBackdrop={renderBackdrop}
+    >
       <div className="modal">
         <div className="modal-header">
           <div className="modal-title">Add food footprint</div>
@@ -116,7 +112,8 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
             <input
               type="submit"
               value="Save Changes"
-              className="primary-button"></input>
+              className="primary-button"
+            ></input>
           </div>
         </form>
       </div>

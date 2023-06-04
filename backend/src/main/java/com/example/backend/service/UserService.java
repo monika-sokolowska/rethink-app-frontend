@@ -52,9 +52,8 @@ public class UserService {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getMainGoal(),
-                user.getIsAdmin()
-                );
+                user.getMainGoal()
+        );
     }
 
 }

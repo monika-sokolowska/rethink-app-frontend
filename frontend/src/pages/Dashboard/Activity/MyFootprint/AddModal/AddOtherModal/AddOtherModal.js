@@ -3,7 +3,6 @@ import "../AddModal.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import { addOtherFootprint } from "../../../../../../reducers/dailyFootprintSlice";
 
 const initialState = {
@@ -13,7 +12,6 @@ const initialState = {
 
 const AddOtherModal = ({ isOpen, handleClose }) => {
   const [values, setValues] = useState(initialState);
-  const { user } = useSelector((store) => store.user);
   const dispatch = useDispatch();
 
   const renderBackdrop = (props) => <div className="backdrop" {...props} />;
@@ -31,14 +29,11 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
       return;
     }
 
-    const userId = user.id;
     const addedFootprint = {
       name: name,
       footprint: footprint,
     };
-    dispatch(
-      addOtherFootprint({ userId: userId, addedFootprint: addedFootprint })
-    );
+    dispatch(addOtherFootprint({ addedFootprint: addedFootprint }));
     handleClose();
     setValues(initialState);
   };
@@ -63,7 +58,8 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
       className="modal"
       show={isOpen}
       onHide={handleClose}
-      renderBackdrop={renderBackdrop}>
+      renderBackdrop={renderBackdrop}
+    >
       <div className="modal">
         <div className="modal-header">
           <div className="modal-title">Add custom footprint</div>
@@ -103,7 +99,8 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
             <input
               type="submit"
               value="Save Changes"
-              className="primary-button"></input>
+              className="primary-button"
+            ></input>
           </div>
         </form>
       </div>

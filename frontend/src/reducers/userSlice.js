@@ -2,8 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 import {
   addUserToLocalStorage,
+  addTokenToLocalStorage,
   getUserFromLocalStorage,
+  getTokenFromLocalStorage,
   removeUserFromLocalStorage,
+  removeTokenFromLocalStorage,
 } from "../utils/localStorage";
 import {
   loginUserThunk,
@@ -14,27 +17,48 @@ import {
 
 const initialState = {
   isLoading: false,
+  token: getTokenFromLocalStorage(),
   user: getUserFromLocalStorage(),
 };
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (user, thunkAPI) => {
-    return loginUserThunk("/user/login", user, thunkAPI);
+    const result = await loginUserThunk("/user/login", user, thunkAPI);
+    thunkAPI.dispatch(getUserAfterLogin());
+    return result;
+  }
+);
+
+export const loginUserFlow = createAsyncThunk(
+  "user/loginUserFlow",
+  async (user, thunkAPI) => {
+    const result = await thunkAPI.dispatch(loginUser(user));
+    thunkAPI.dispatch(getUserAfterLogin());
+    return result;
   }
 );
 
 export const changeMainGoal = createAsyncThunk(
   "user/changeMainGoal",
-  async (data) => {
-    const { userId, goal } = data;
-    return changeMainGoalThunk(`/user/goal/change/${userId}`, goal);
+  async (data, thunkAPI) => {
+    const { goal } = data;
+    const result = await changeMainGoalThunk(`/user/goal/change`, goal);
+    thunkAPI.dispatch(getUser());
+    return result;
   }
 );
 
-export const getUser = createAsyncThunk("user/getUser", async (userId) => {
-  return getUserThunk(`/user/get/${userId}`);
+export const getUser = createAsyncThunk("user/getUser", async (_) => {
+  return getUserThunk(`/user/get`);
 });
+
+const getUserAfterLogin = createAsyncThunk(
+  "user/getUserAfterLogin",
+  async (thunkAPI) => {
+    return getUserThunk(`/user/get`);
+  }
+);
 
 export const clearStore = createAsyncThunk("user/clearStore", clearStoreThunk);
 const userSlice = createSlice({
@@ -44,6 +68,7 @@ const userSlice = createSlice({
     logoutUser: (state, { payload }) => {
       state.user = null;
       removeUserFromLocalStorage();
+      removeTokenFromLocalStorage();
       if (payload) {
         toast.success(payload);
       }
@@ -55,12 +80,11 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        const user = payload;
+        const token = payload;
         console.log("payload", payload);
         state.isLoading = false;
-        state.user = user;
-        addUserToLocalStorage(user);
-        toast.success(`Welcome ${user.name}`);
+        state.token = token;
+        addTokenToLocalStorage(token);
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -74,6 +98,7 @@ const userSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, { payload }) => {
         const user = payload;
+        console.log("get user payload ", user);
         state.isLoading = false;
         state.user = user;
         addUserToLocalStorage(user);
@@ -81,6 +106,14 @@ const userSlice = createSlice({
       .addCase(getUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         toast.error(payload);
+      })
+      .addCase(getUserAfterLogin.fulfilled, (state, { payload }) => {
+        const user = payload;
+        console.log("get user payload after login ", user);
+        state.isLoading = false;
+        state.user = user;
+        addUserToLocalStorage(user);
+        toast.success(`Welcome ${user.name}`);
       });
   },
 });

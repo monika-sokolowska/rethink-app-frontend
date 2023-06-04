@@ -6,9 +6,8 @@ public record UserDTO(
         String lastName,
         String email,
         String password,
-        Float mainGoal,
-        Boolean isAdmin
-        ) {
+        Float mainGoal
+) {
 
 
 }

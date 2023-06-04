@@ -11,49 +11,62 @@ const initialState = {
 
 export const getTransportFootprint = createAsyncThunk(
   "user/getTransportFootprint",
-  async (userId, thunkAPI) => {
-    return getFootprintThunk(`/footprint/transport/${userId}`, thunkAPI);
+  async (_, thunkAPI) => {
+    return getFootprintThunk(`/footprint/transport`, thunkAPI);
   }
 );
 
 export const getFoodFootprint = createAsyncThunk(
   "user/getFoodFootprint",
-  async (userId, thunkAPI) => {
-    return getFootprintThunk(`/footprint/food/${userId}`, thunkAPI);
+  async (_, thunkAPI) => {
+    return getFootprintThunk(`/footprint/food`, thunkAPI);
   }
 );
 
 export const getOtherFootprint = createAsyncThunk(
   "user/getOtherFootprint",
-  async (userId, thunkAPI) => {
-    return getFootprintThunk(`/footprint/other/${userId}`, thunkAPI);
+  async (_, thunkAPI) => {
+    return getFootprintThunk(`/footprint/other`, thunkAPI);
   }
 );
 
 export const addTransportFootprint = createAsyncThunk(
   "user/addTransportFootprint",
-  async (data) => {
-    const { userId, addedFootprint } = data;
-    return addFootprintThunk(
-      `/footprint/add/transport/${userId}`,
+  async (data, thunkAPI) => {
+    const { addedFootprint } = data;
+    const result = await addFootprintThunk(
+      `/footprint/add/transport`,
       addedFootprint
     );
+    thunkAPI.dispatch(getTransportFootprint());
+    return result;
   }
 );
 
 export const addFoodFootprint = createAsyncThunk(
   "user/addFoodFootprint",
-  async (data) => {
-    const { userId, addedFootprint } = data;
-    return addFootprintThunk(`/footprint/add/food/${userId}`, addedFootprint);
+  async (data, thunkAPI) => {
+    const { addedFootprint } = data;
+    const result = await addFootprintThunk(
+      `/footprint/add/food`,
+      addedFootprint
+    );
+    thunkAPI.dispatch(getFoodFootprint());
+    return result;
   }
 );
 
 export const addOtherFootprint = createAsyncThunk(
   "user/addFoodFootprint",
-  async (data) => {
-    const { userId, addedFootprint } = data;
-    return addFootprintThunk(`/footprint/add/other/${userId}`, addedFootprint);
+  async (data, thunkAPI) => {
+    const { addedFootprint } = data;
+    const result = await addFootprintThunk(
+      `/footprint/add/other`,
+      addedFootprint
+    );
+
+    thunkAPI.dispatch(getOtherFootprint());
+    return result;
   }
 );
 

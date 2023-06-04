@@ -10,15 +10,20 @@ const initialState = {
 
 export const getGoals = createAsyncThunk(
   "user/getGoals",
-  async (userId, thunkAPI) => {
-    return getGoalsThunk(`/goal/all/${userId}`, thunkAPI);
+  async (_, thunkAPI) => {
+    return getGoalsThunk(`/goal/all`, thunkAPI);
   }
 );
 
-export const addGoal = createAsyncThunk("user/addGoal", async (data) => {
-  const { userId, goal } = data;
-  return addGoalThunk(`/goal/add/${userId}`, goal);
-});
+export const addGoal = createAsyncThunk(
+  "user/addGoal",
+  async (data, thunkAPI) => {
+    const { goal } = data;
+    const result = await addGoalThunk(`/goal/add`, goal);
+    thunkAPI.dispatch(getGoals());
+    return result;
+  }
+);
 
 const goalsSlice = createSlice({
   name: "goals",

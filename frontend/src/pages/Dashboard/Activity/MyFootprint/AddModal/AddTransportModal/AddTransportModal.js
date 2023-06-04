@@ -63,7 +63,8 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
       className="modal"
       show={isOpen}
       onHide={handleClose}
-      renderBackdrop={renderBackdrop}>
+      renderBackdrop={renderBackdrop}
+    >
       <div className="modal">
         <div className="modal-header">
           <div className="modal-title">Add transport footprint</div>
@@ -107,13 +108,18 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
             </div>
           </div>
           <div className="modal-footer">
-            <button className="secondary-button" onClick={onClose}>
+            <button
+              className="secondary-button"
+              onClick={onClose}
+              type="button"
+            >
               Close
             </button>
             <input
               type="submit"
               value="Save Changes"
-              className="primary-button"></input>
+              className="primary-button"
+            ></input>
           </div>
         </form>
       </div>

@@ -20,13 +20,12 @@ const MyFootprint = () => {
   const [showTransportModal, setShowTransportModal] = useState(false);
   const [showFoodModal, setShowFoodModal] = useState(false);
   const [showOtherModal, setShowOtherModal] = useState(false);
-  const reload = () => window.location.reload();
 
   useEffect(() => {
     dispatch(getTransportFootprint(user.id));
     dispatch(getFoodFootprint(user.id));
     dispatch(getOtherFootprint(user.id));
-  }, []);
+  }, [dispatch, user.id]);
 
   const openTransportAddModal = () => {
     setShowTransportModal(true);
@@ -34,7 +33,6 @@ const MyFootprint = () => {
 
   const handleTransportModalClose = () => {
     setShowTransportModal(false);
-    reload();
   };
 
   const openFoodAddModal = () => {
@@ -43,7 +41,6 @@ const MyFootprint = () => {
 
   const handleFoodModalClose = () => {
     setShowFoodModal(false);
-    reload();
   };
 
   const openOtherAddModal = () => {
@@ -52,7 +49,6 @@ const MyFootprint = () => {
 
   const handleOtherModalClose = () => {
     setShowOtherModal(false);
-    reload();
   };
 
   return (
