@@ -23,7 +23,9 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/admin");
+      console.log(user.roles);
+      if (user.roles.includes("ROLE_ADMIN")) navigate("/admin");
+      else navigate("/home");
     }
   }, [navigate, user]);
 

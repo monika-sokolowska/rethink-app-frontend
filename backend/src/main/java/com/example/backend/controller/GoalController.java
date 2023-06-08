@@ -1,9 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.DTO.AddGoalDTO;
-import com.example.backend.DTO.AddOtherDTO;
-import com.example.backend.DTO.GoalDTO;
-import com.example.backend.DTO.OtherFootprintDTO;
+import com.example.backend.DTO.*;
 import com.example.backend.security.services.UserDetailsImpl;
 import com.example.backend.service.GoalService;
 import org.springframework.http.ResponseEntity;
@@ -36,10 +33,18 @@ public class GoalController {
 
     @PreAuthorize("hasRole('USER')")
     @PostMapping(path="/add")
-    public ResponseEntity<GoalDTO> addOther(@RequestBody AddGoalDTO addGoalDTO) {
+    public ResponseEntity<GoalDTO> addGoal(@RequestBody AddGoalDTO addGoalDTO) {
 
         UserDetailsImpl user = GetCurrentUser();
         return ResponseEntity.ok(goalService.addGoalById(user.getId(), addGoalDTO));
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping(path="/delete")
+    public ResponseEntity<GoalDTO> deleteGoal(@RequestBody DeleteDTO deleteDTO) {
+        System.out.println("Delete");
+        UserDetailsImpl user = GetCurrentUser();
+        return ResponseEntity.ok(goalService.deleteGoalById(user.getId(), deleteDTO.id()));
     }
 }
 

@@ -3,6 +3,7 @@ import ActivitySectionPart from "./ActivitySectionPart/ActivitySectionPart";
 import AddTransportModal from "./AddModal/AddTransportModal/AddTransportModal";
 import AddFoodModal from "./AddModal/AddFoodModal/AddFoodModal";
 import AddOtherModal from "./AddModal/AddOtherModal/AddOtherModal";
+import AddCompensatedModal from "./AddModal/AddCompensatedModal/AddCompensatedModal";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -11,20 +12,25 @@ import {
   getTransportFootprint,
   getFoodFootprint,
   getOtherFootprint,
+  getCompensatedFootprint,
 } from "../../../../reducers/dailyFootprintSlice";
 
 const MyFootprint = () => {
   const { user } = useSelector((store) => store.user);
-  const { transport, food, other } = useSelector((store) => store.footprint);
+  const { transport, food, other, compensated } = useSelector(
+    (store) => store.footprint
+  );
   const dispatch = useDispatch();
   const [showTransportModal, setShowTransportModal] = useState(false);
   const [showFoodModal, setShowFoodModal] = useState(false);
   const [showOtherModal, setShowOtherModal] = useState(false);
+  const [showCompensatedModal, setShowCompensatedModal] = useState(false);
 
   useEffect(() => {
     dispatch(getTransportFootprint(user.id));
     dispatch(getFoodFootprint(user.id));
     dispatch(getOtherFootprint(user.id));
+    dispatch(getCompensatedFootprint(user.id));
   }, [dispatch, user.id]);
 
   const openTransportAddModal = () => {
@@ -51,6 +57,14 @@ const MyFootprint = () => {
     setShowOtherModal(false);
   };
 
+  const openCompensatedAddModal = () => {
+    setShowCompensatedModal(true);
+  };
+
+  const handleCompensatedAddModalClose = () => {
+    setShowCompensatedModal(false);
+  };
+
   return (
     <section className="my-footprint">
       <AddTransportModal
@@ -61,6 +75,10 @@ const MyFootprint = () => {
       <AddOtherModal
         isOpen={showOtherModal}
         handleClose={handleOtherModalClose}
+      />
+      <AddCompensatedModal
+        isOpen={showCompensatedModal}
+        handleClose={handleCompensatedAddModalClose}
       />
       <ActivitySectionPart
         label="Transport"
@@ -76,6 +94,11 @@ const MyFootprint = () => {
         label="Other"
         data={other}
         onAddButton={openOtherAddModal}
+      />
+      <ActivitySectionPart
+        label="Compensated"
+        data={compensated}
+        onAddButton={openCompensatedAddModal}
       />
     </section>
   );

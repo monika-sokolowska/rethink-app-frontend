@@ -4,6 +4,7 @@ import goalsSlice from "./reducers/goalsSlice";
 import allArticlesSlice from "./reducers/allArticlesSlice";
 import dailyFootprintSlice from "./reducers/dailyFootprintSlice";
 import householdFootprintSlice from "./reducers/householdFootprintSlice";
+import stats from "./reducers/statsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     goals: goalsSlice,
     footprint: dailyFootprintSlice,
     householdFootprint: householdFootprintSlice,
+    stats: stats,
   },
 });

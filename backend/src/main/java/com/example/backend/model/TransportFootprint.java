@@ -18,13 +18,13 @@ public class TransportFootprint {
     @Column(name = "name", columnDefinition = "VARCHAR(45)")
     private String name;
 
-    @Column(name = "kilometers", columnDefinition = "FLOAT(5,2)")
+    @Column(name = "kilometers", columnDefinition = "FLOAT(6,2)")
     private Float kilometers;
 
-    @Column(name = "footprint", columnDefinition = "FLOAT(4,2)")
+    @Column(name = "footprint", columnDefinition = "FLOAT(5,2)")
     private Float footprint;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_daily_footprint", referencedColumnName = "id_daily_footprint",
             foreignKey = @ForeignKey(name = "fk_transport_daily_footprint"))
     @OnDelete(action = OnDeleteAction.NO_ACTION)

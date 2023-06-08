@@ -1,8 +1,28 @@
 import React, { useState } from "react";
 import "./ActivitiesList.css";
 import ActivitiesListItem from "./ActivitiesListItem/ActivitiesListItem";
+import {
+  deleteFoodFootprint,
+  deleteOtherFootprint,
+  deleteTransportFootprint,
+} from "../../../../../../reducers/dailyFootprintSlice";
+import { useDispatch } from "react-redux";
 
 const ActivitiesList = ({ data }) => {
+  const dispatch = useDispatch();
+
+  const handleFoodDelete = (id) => {
+    dispatch(deleteFoodFootprint({ id: id }));
+  };
+
+  const handleTransportDelete = (id) => {
+    dispatch(deleteTransportFootprint({ id: id }));
+  };
+
+  const handleOtherDelete = (id) => {
+    dispatch(deleteOtherFootprint({ id: id }));
+  };
+
   const displayActivitiesList = (item) => {
     if (item.kilometers) {
       return (
@@ -10,6 +30,7 @@ const ActivitiesList = ({ data }) => {
           name={item.name}
           footprint={item.footprint}
           info={`${item.kilometers} km`}
+          handleDelete={handleTransportDelete}
         />
       );
     }
@@ -19,6 +40,7 @@ const ActivitiesList = ({ data }) => {
           name={item.name}
           footprint={item.footprint}
           info={`${item.meal}`}
+          handleDelete={handleFoodDelete}
         />
       );
     } else {
@@ -27,6 +49,7 @@ const ActivitiesList = ({ data }) => {
           name={item.name}
           footprint={item.footprint}
           info={""}
+          handleDelete={handleOtherDelete}
         />
       );
     }

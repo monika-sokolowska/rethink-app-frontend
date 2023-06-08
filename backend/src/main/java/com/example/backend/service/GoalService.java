@@ -7,9 +7,7 @@ import com.example.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class GoalService {
@@ -44,6 +42,23 @@ public class GoalService {
         goal.setUser(userRepository.findUserById(id));
 
         goalRepository.save(goal);
+
+        return convertGoalToGoalDTO(goal);
+    }
+
+    public GoalDTO deleteGoalById(Integer id, Integer goalId)  {
+
+        Goal goal = goalRepository.findGoalById(goalId);
+
+        System.out.println("service");
+
+        if (goal == null) {
+            return null;
+        }
+        if(Objects.equals(goal.getUser().getId(), id)) {
+            System.out.println(goal);
+            goalRepository.deleteById(goalId);
+        }
 
         return convertGoalToGoalDTO(goal);
     }

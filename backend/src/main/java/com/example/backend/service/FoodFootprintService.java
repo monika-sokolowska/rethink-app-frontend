@@ -1,7 +1,9 @@
 package com.example.backend.service;
 
 import com.example.backend.DTO.AddFoodDTO;
+import com.example.backend.DTO.CompensatedFootprintDTO;
 import com.example.backend.DTO.FoodFootprintDTO;
+import com.example.backend.model.CompensatedFootprint;
 import com.example.backend.model.FoodFootprint;
 import com.example.backend.repository.DailyFootprintRepository;
 import com.example.backend.repository.FoodFootprintRepository;
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Service
 public class FoodFootprintService    {
     private final FoodFootprintRepository foodFootprintRepository;
@@ -42,6 +46,21 @@ public class FoodFootprintService    {
         foodFootprint.setDailyFootprint(dailyFootprintRepository.findDailyFootprintById(id));
 
         foodFootprintRepository.save(foodFootprint);
+
+        return convertFoodFootprintToFoodFootprintDTO(foodFootprint);
+    }
+
+    public FoodFootprintDTO removeFoodFootprintById(Integer id, Integer goalId)  {
+
+        FoodFootprint foodFootprint = foodFootprintRepository.findOneFoodFootprintById(goalId);
+
+
+        if (foodFootprint == null) {
+            return null;
+        }
+        if(Objects.equals(foodFootprint.getDailyFootprint().getUser().getId(), id)) {
+            foodFootprintRepository.deleteById(goalId);
+        }
 
         return convertFoodFootprintToFoodFootprintDTO(foodFootprint);
     }

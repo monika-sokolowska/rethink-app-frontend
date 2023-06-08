@@ -4,7 +4,7 @@ import Checkbox from "@mui/material/Checkbox";
 import CircleChecked from "@mui/icons-material/CheckCircleOutline";
 import CircleUnchecked from "@mui/icons-material/RadioButtonUnchecked";
 
-const Goal = ({ name }) => {
+const Goal = ({ name, deleteItem }) => {
   return (
     <div className="goal">
       <Checkbox
@@ -26,7 +26,11 @@ const Goal = ({ name }) => {
           size={20}
           style={{ color: "#000", marginRight: "1rem", height: "60%" }}
         />
-        <AiOutlineDelete size={20} style={{ color: "#000", height: "60%" }} />
+        <AiOutlineDelete
+          size={20}
+          style={{ color: "#000", height: "60%" }}
+          onClick={deleteItem}
+        />
       </div>
     </div>
   );

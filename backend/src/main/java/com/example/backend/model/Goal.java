@@ -20,7 +20,7 @@ public class Goal {
     @Column(name = "description", columnDefinition = "VARCHAR(64)")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_user", referencedColumnName = "id_user",
             foreignKey = @ForeignKey(name = "fk_goal_user"))
     @OnDelete(action = OnDeleteAction.NO_ACTION)

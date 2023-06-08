@@ -16,3 +16,10 @@ export const addFootprintThunk = async (url, footprint) => {
     return resp.data;
   } catch (error) {}
 };
+
+export const removeFootprintThunk = async (url, id) => {
+  try {
+    const resp = await customFetch.delete(url, { data: id });
+    return resp.data;
+  } catch (error) {}
+};

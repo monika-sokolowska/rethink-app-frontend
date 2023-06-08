@@ -1,8 +1,10 @@
 package com.example.backend.service;
 
 import com.example.backend.DTO.AddTransportDTO;
+import com.example.backend.DTO.OtherFootprintDTO;
 import com.example.backend.DTO.TransportFootprintDTO;
 import com.example.backend.model.DailyFootprint;
+import com.example.backend.model.OtherFootprint;
 import com.example.backend.model.TransportFootprint;
 import com.example.backend.repository.DailyFootprintRepository;
 import com.example.backend.repository.TransportFootprintRepository;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
+
 @Service
 public class TransportFootprintService {
 
@@ -23,6 +27,21 @@ public class TransportFootprintService {
     public TransportFootprintService(TransportFootprintRepository transportFootprintRepository, DailyFootprintRepository dailyFootprintRepository) {
         this.transportFootprintRepository = transportFootprintRepository;
         this.dailyFootprintRepository = dailyFootprintRepository;
+    }
+
+    public TransportFootprintDTO removeTransportFootprintById(Integer id, Integer goalId)  {
+
+        TransportFootprint transportFootprint = transportFootprintRepository.findOneTransportFootprintById(goalId);
+
+
+        if (transportFootprint == null) {
+            return null;
+        }
+        if(Objects.equals(transportFootprint.getDailyFootprint().getUser().getId(), id)) {
+            transportFootprintRepository.deleteById(goalId);
+        }
+
+        return convertTransportFootprintToTransportFootprintDTO(transportFootprint);
     }
 
     public List<TransportFootprintDTO> findTransportFootprintById(Integer id)  {

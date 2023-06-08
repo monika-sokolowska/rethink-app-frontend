@@ -15,3 +15,10 @@ export const addGoalThunk = async (url, goal) => {
     return resp.data;
   } catch (error) {}
 };
+
+export const deleteGoalThunk = async (url, id) => {
+  try {
+    const resp = await customFetch.delete(url, { data: id });
+    return resp.data;
+  } catch (error) {}
+};

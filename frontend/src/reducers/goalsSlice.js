@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-import { getGoalsThunk, addGoalThunk } from "./goalsThunk";
+import { getGoalsThunk, addGoalThunk, deleteGoalThunk } from "./goalsThunk";
 
 const initialState = {
   isLoading: false,
@@ -19,6 +19,16 @@ export const addGoal = createAsyncThunk(
   "user/addGoal",
   async (goal, thunkAPI) => {
     const result = await addGoalThunk(`/goal/add`, goal);
+    thunkAPI.dispatch(getGoals());
+    return result;
+  }
+);
+
+export const deleteGoal = createAsyncThunk(
+  "user/deleteGoal",
+  async (id, thunkAPI) => {
+    console.log(id);
+    const result = await deleteGoalThunk(`/goal/delete`, id);
     thunkAPI.dispatch(getGoals());
     return result;
   }

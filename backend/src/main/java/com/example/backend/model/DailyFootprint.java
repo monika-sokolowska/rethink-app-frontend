@@ -18,7 +18,7 @@ public class DailyFootprint {
     @Column(name = "date", columnDefinition = "DATE")
     private Date date;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST )
     @JoinColumn(name = "id_user", referencedColumnName = "id_user",
             foreignKey = @ForeignKey(name = "fk_daily_footprint_user"))
     @OnDelete(action = OnDeleteAction.NO_ACTION)

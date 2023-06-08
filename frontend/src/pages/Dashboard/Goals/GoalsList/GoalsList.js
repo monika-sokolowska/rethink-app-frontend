@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import "./GoalsList.css";
 import Goal from "./Goal/Goal";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteGoal } from "../../../../reducers/goalsSlice";
 
 const GoalsList = () => {
   const { goals } = useSelector((store) => store.goals);
+  const dispatch = useDispatch();
+
+  const deleteGoalItem = (id) => {
+    dispatch(deleteGoal({ id: id }));
+  };
 
   return (
     <div className="goals-list">
@@ -14,7 +19,7 @@ const GoalsList = () => {
           const { id, description } = item;
           return (
             <article key={id} className="goals-article">
-              <Goal name={description} />
+              <Goal name={description} deleteItem={() => deleteGoalItem(id)} />
             </article>
           );
         })}

@@ -1,27 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import {
-  getHouseholdThunk,
-  addHouseholdThunk,
-} from "./householdFootprintThunk";
+import { getHouseholdThunk } from "./householdFootprintThunk";
 
 const initialState = {
   isLoading: false,
-  householdFootprint: [],
+  householdFootprint: {},
 };
 
 export const getHouseholdFootprint = createAsyncThunk(
   "user/getHouseholdFootprint",
   async (userId, thunkAPI) => {
-    return getHouseholdThunk(`/household/get/${userId}`, thunkAPI);
-  }
-);
-
-export const addHouseholdFootprint = createAsyncThunk(
-  "user/addHouseholdFootprint",
-  async (data) => {
-    const { userId, footprint } = data;
-    return addHouseholdThunk(`/household/add/${userId}`, footprint);
+    return getHouseholdThunk(`/household/get`, userId);
   }
 );
 
@@ -36,8 +25,8 @@ const householdFootprintSlice = createSlice({
       })
       .addCase(getHouseholdFootprint.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        const transport = payload;
-        state.transport = transport;
+        const householdFootprint = payload;
+        state.householdFootprint = householdFootprint;
       })
       .addCase(getHouseholdFootprint.rejected, (state, { payload }) => {
         state.isLoading = false;

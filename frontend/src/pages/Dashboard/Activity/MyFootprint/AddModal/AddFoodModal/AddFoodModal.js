@@ -55,20 +55,6 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleNumberChange = (e) => {
-    e.stopPropagation();
-
-    const name = e.target.name;
-    let value = e.target.value;
-
-    value = Math.max(
-      minFootprint,
-      Math.min(maxFootprint, Number(e.target.value))
-    );
-
-    setValues({ ...values, [name]: value });
-  };
-
   return (
     <Modal
       className="modal"
@@ -111,7 +97,7 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
               <input
                 type="number"
                 id="footprint"
-                onChange={handleNumberChange}
+                onChange={handleChange}
                 name="footprint"
                 value={values.footprint}
               />

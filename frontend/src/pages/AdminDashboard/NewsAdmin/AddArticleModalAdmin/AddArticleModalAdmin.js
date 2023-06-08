@@ -82,7 +82,7 @@ const AddArticleModalAdmin = ({ isOpen, handleClose }) => {
             </div>
             <div className="article-input">
               <label>Article</label>
-              <input
+              <textarea
                 type="text"
                 onChange={handleChange}
                 name="description"

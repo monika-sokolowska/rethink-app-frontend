@@ -16,4 +16,9 @@ public interface DailyFootprintRepository extends CrudRepository<DailyFootprint,
             value = "SELECT * FROM daily_footprint WHERE id_user=:id AND date=CURRENT_DATE",
             nativeQuery = true)
     DailyFootprint findDailyFootprintById(@Param("id") Integer id);
+
+    @Query(
+            value = "SELECT * FROM daily_footprint WHERE id_user=:id AND date between DATE_FORMAT(CURRENT_DATE, '%Y-%m-01') and CURRENT_DATE",
+            nativeQuery = true)
+    List<DailyFootprint> findMonthlyFootprintById(@Param("id") Integer id);
 }

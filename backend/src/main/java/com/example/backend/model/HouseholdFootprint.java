@@ -18,10 +18,10 @@ public class HouseholdFootprint {
     @Column(name = "date", columnDefinition = "DATE")
     private Date date;
 
-    @Column(name = "footprint", columnDefinition = "FLOAT(2,2)")
+    @Column(name = "footprint", columnDefinition = "FLOAT(6,2)")
     private Float footprint;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_user", referencedColumnName = "id_user",
             foreignKey = @ForeignKey(name = "fk_household_footprint_user"))
     @OnDelete(action = OnDeleteAction.NO_ACTION)

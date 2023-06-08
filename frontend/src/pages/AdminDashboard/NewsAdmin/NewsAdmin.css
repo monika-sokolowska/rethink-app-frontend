@@ -41,11 +41,6 @@
   background: #ffffff;
 }
 
-.news-wrapper {
-  width: 350px;
-  height: 400px;
-}
-
 .news-header {
   display: flex;
   align-items: center;

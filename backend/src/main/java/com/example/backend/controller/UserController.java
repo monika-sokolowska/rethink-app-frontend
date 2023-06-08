@@ -62,19 +62,6 @@ public class UserController {
         return userService.returnAllUsers();
     }
 
-    //    @PostMapping(path="/login")
-    //    public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginDTO) {
-    //
-    //        try {
-    //            User user = userService.getUserByEmail(loginDTO.email());
-    //            if(!user.getPassword().equals(loginDTO.password()))
-    //                throw new UserNotFoundException("User with given password not found.");
-    //            return ResponseEntity.ok(userService.convertUserToUserDTO(user));
-    //        } catch (UserNotFoundException e) {
-    //            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    //        }
-    //
-    //    }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginDTO loginRequest) {

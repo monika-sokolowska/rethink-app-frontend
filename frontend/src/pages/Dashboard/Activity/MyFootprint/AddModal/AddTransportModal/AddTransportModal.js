@@ -111,7 +111,7 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
               <input
                 type="number"
                 id="kilometers"
-                onChange={handleNumberChange}
+                onChange={handleChange}
                 name="kilometers"
                 value={values.kilometers}
               />
@@ -121,7 +121,7 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
               <input
                 type="number"
                 id="footprint"
-                onChange={handleNumberChange}
+                onChange={handleChange}
                 name="footprint"
                 value={values.footprint}
               />

@@ -20,10 +20,10 @@ public class FoodFootprint {
     @Enumerated(EnumType.STRING)
     private Meal meal;
 
-    @Column(name = "footprint", columnDefinition = "FLOAT(4,2)")
+    @Column(name = "footprint", columnDefinition = "FLOAT(5,2)")
     private Float footprint;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "id_daily_footprint", referencedColumnName = "id_daily_footprint",
             foreignKey = @ForeignKey(name = "fk_food_daily_footprint"))
     @OnDelete(action = OnDeleteAction.NO_ACTION)
