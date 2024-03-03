@@ -27,7 +27,6 @@ export const addGoal = createAsyncThunk(
 export const deleteGoal = createAsyncThunk(
   "user/deleteGoal",
   async (id, thunkAPI) => {
-    console.log(id);
     const result = await deleteGoalThunk(`/goal/delete`, id);
     thunkAPI.dispatch(getGoals());
     return result;
@@ -47,7 +46,6 @@ const goalsSlice = createSlice({
         state.isLoading = false;
         const goals = payload;
         state.goals = goals;
-        console.log("state.goals", state.goals);
       })
       .addCase(getGoals.rejected, (state, { payload }) => {
         state.isLoading = false;

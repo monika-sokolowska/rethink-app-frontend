@@ -19,9 +19,6 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name } = values;
-    console.log({
-      name: name,
-    });
 
     if (!name) {
       toast.error("Please fill out all fields");
@@ -34,7 +31,6 @@ const AddOtherModal = ({ isOpen, handleClose }) => {
   };
 
   const onClose = () => {
-    console.log(values);
     handleClose();
     setValues(initialState);
   };

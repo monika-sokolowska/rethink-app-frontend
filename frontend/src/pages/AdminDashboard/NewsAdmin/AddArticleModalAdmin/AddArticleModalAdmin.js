@@ -19,7 +19,6 @@ const AddArticleModalAdmin = ({ isOpen, handleClose }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, image, description } = values;
-    console.log(values);
 
     if (!name || !description || !image) {
       toast.error("Please fill out all fields");

@@ -17,9 +17,7 @@ export const getAllArticles = createAsyncThunk(
 export const addArticle = createAsyncThunk(
   "allArticles/addArticle",
   async (article, thunkAPI) => {
-    console.log("addArticle", article);
     const result = await addArticleThunk(`/article/add`, article);
-    console.log("result", result);
 
     thunkAPI.dispatch(getAllArticles());
     return result;

@@ -21,10 +21,6 @@ const AddCompensatedModal = ({ isOpen, handleClose }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, footprint } = values;
-    console.log({
-      name: name,
-      footprint: footprint,
-    });
 
     if (!name || !footprint) {
       toast.error("Please fill out all fields");
@@ -37,7 +33,6 @@ const AddCompensatedModal = ({ isOpen, handleClose }) => {
   };
 
   const onClose = () => {
-    console.log(values);
     handleClose();
     setValues(initialState);
   };

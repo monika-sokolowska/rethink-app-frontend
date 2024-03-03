@@ -24,9 +24,6 @@ const ChangeMainGoalModal = ({ isOpen, handleClose }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { goal } = values;
-    console.log({
-      goal: goal,
-    });
 
     if (!goal) {
       toast.error("Please fill out all fields");
@@ -43,7 +40,6 @@ const ChangeMainGoalModal = ({ isOpen, handleClose }) => {
   };
 
   const onClose = () => {
-    console.log(values);
     handleClose();
     setValues(initialState);
   };

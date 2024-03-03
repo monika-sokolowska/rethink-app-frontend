@@ -23,7 +23,6 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user.roles);
       if (user.roles.includes("ROLE_ADMIN")) navigate("/admin");
       else navigate("/home");
     }
@@ -31,9 +30,7 @@ const LoginPage = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("submit");
     const { email, password, isMember } = values;
-    console.log(email, password);
     if (!email || !password) {
       toast.error("Please fill out all fields");
       return;

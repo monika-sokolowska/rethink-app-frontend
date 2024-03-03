@@ -10,7 +10,6 @@ export const getFootprintThunk = async (url, thunkAPI) => {
 };
 
 export const addFootprintThunk = async (url, footprint) => {
-  console.log(footprint);
   try {
     const resp = await customFetch.post(url, footprint);
     return resp.data;

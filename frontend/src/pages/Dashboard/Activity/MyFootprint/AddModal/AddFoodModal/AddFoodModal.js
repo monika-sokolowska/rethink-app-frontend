@@ -22,11 +22,6 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, meal, footprint } = values;
-    console.log({
-      name: name,
-      meal: meal,
-      footprint: footprint,
-    });
 
     if (!name || !meal || !footprint) {
       toast.error("Please fill out all fields");
@@ -41,7 +36,6 @@ const AddFoodModal = ({ isOpen, handleClose }) => {
   };
 
   const onClose = () => {
-    console.log(values);
     handleClose();
     setValues(initialState);
   };

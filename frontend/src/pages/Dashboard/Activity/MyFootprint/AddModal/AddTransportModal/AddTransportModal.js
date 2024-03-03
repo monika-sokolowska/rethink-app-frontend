@@ -24,12 +24,6 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { name, kilometers, footprint } = values;
-    console.log({
-      name: name,
-      kilometers: kilometers,
-      footprint: footprint,
-    });
-
     if (!name || !kilometers || !footprint) {
       toast.error("Please fill out all fields");
       return;
@@ -71,8 +65,8 @@ const AddTransportModal = ({ isOpen, handleClose }) => {
       );
     } else if (name === "kilometers") {
       value = Math.max(
-        minFootprint,
-        Math.min(maxFootprint, Number(e.target.value))
+        minKilometers,
+        Math.min(maxKilometers, Number(e.target.value))
       );
     }
 

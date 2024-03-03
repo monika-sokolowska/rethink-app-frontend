@@ -90,7 +90,6 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         const token = payload;
-        console.log("payload", payload);
         state.isLoading = false;
         state.token = token;
         addTokenToLocalStorage(token);
@@ -107,7 +106,6 @@ const userSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, { payload }) => {
         const user = payload;
-        console.log("get user payload ", user);
         state.isLoading = false;
         state.user = user;
         addUserToLocalStorage(user);
@@ -118,7 +116,6 @@ const userSlice = createSlice({
       })
       .addCase(getUserAfterLogin.fulfilled, (state, { payload }) => {
         const user = payload;
-        console.log("get user payload after login ", user);
         state.isLoading = false;
         state.user = user;
         addUserToLocalStorage(user);
